@@ -71,7 +71,7 @@ const Footer = () => {
                 <br />
                 <textarea
                   rows={5}
-                  value="Message"
+                  defaultValue="Message"
                   className="w-full py-2.5 pl-2 bg-white"
                 ></textarea>
                 <br />
