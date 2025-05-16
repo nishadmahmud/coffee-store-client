@@ -1,14 +1,16 @@
 import React from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router";
 
 const AddCoffee = () => {
   const handleAddCoffee = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const newCoffee = Object.fromEntries(formData.entries());
 
+    // send coffee data to the db
     fetch("http://localhost:3000/coffees", {
       method: "POST",
       headers: {
@@ -18,15 +20,16 @@ const AddCoffee = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data._id) {
-          console.log("After adding ", data);
-        //   form.reset();
+        if (data.insertedId) {
+          toast.success("Coffee Added Successfully!");
+          // form.reset();
         }
       });
   };
 
   return (
     <div className="bg-[url(src/assets/images/more/11.png)] pb-20">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="w-[80%] mx-auto py-8 ">
         <Link
           to="/"
@@ -90,7 +93,7 @@ const AddCoffee = () => {
                 </label>
                 <input
                   type="text"
-                  name="Taste"
+                  name="taste"
                   className="py-2 pl-2 rounded-md text-[#1B1A1A99] text-xs bg-white"
                   placeholder="Enter coffee taste"
                 />
@@ -108,13 +111,13 @@ const AddCoffee = () => {
               </fieldset>
               <fieldset className="flex flex-col gap-2.5">
                 <label className="text-sm text-[#1B1A1ACC] font-semibold">
-                  Details
+                  Price
                 </label>
                 <input
                   type="text"
-                  name="details"
+                  name="price"
                   className="py-2 pl-2 rounded-md text-[#1B1A1A99] text-xs bg-white"
-                  placeholder="Enter coffee details"
+                  placeholder="Enter coffee price"
                 />
               </fieldset>
             </div>
@@ -129,13 +132,12 @@ const AddCoffee = () => {
                 placeholder="Enter photo URL"
               />
             </fieldset>
-            <div className="cursor-pointer rancho text-center border-2 border-[#331A15] bg-[#D2B48C] py-2.5 rounded-sm hover:bg-[#331A15] hover:text-[#D2B48C]">
-              <input
-                type="submit"
-                value="Add Coffee"
-                className="cursor-pointer"
-              />
-            </div>
+            <button
+              type="submit"
+              className="w-full rancho text-center border-2 border-[#331A15] bg-[#D2B48C] py-2.5 rounded-sm hover:bg-[#331A15] hover:text-[#D2B48C] cursor-pointer"
+            >
+              Add Coffee
+            </button>
           </form>
         </div>
       </div>
