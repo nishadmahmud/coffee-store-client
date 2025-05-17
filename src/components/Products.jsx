@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaCoffee } from "react-icons/fa";
 import { Link } from "react-router";
 import CoffeeCard from "./CoffeeCard";
 
-const Products = ({ coffees }) => {
+const Products = ({ initialCoffees }) => {
+  const [coffees, setCoffees] = useState(initialCoffees);
+
   return (
     <div className="bg-[#FFFFFF] bg-[url(src/assets/images/more/1.png)] bg-cover bg-center py-20">
       <div className="text-center mx-auto mb-8">
@@ -23,7 +25,12 @@ const Products = ({ coffees }) => {
       </div>
       <div className="w-[80%] mx-auto gap-4 grid grid-cols-2">
         {coffees.map((coffee) => (
-          <CoffeeCard coffee={coffee}></CoffeeCard>
+          <CoffeeCard
+            key={coffee._id}
+            coffees={coffees}
+            setCoffees={setCoffees}
+            coffee={coffee}
+          ></CoffeeCard>
         ))}
       </div>
     </div>

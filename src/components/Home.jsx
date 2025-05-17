@@ -1,14 +1,14 @@
-import React from "react";
 import Hero from "./Hero";
 import { useLoaderData } from "react-router";
 import Products from "./Products";
 
 const Home = () => {
-  const coffees = useLoaderData();
+  const initialCoffees = useLoaderData();
+
   return (
     <div>
       <Hero></Hero>
-      <Products coffees={coffees}></Products>
+      <Products initialCoffees={initialCoffees}></Products>
     </div>
   );
 };
